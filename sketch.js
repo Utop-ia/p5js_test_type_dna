@@ -1,52 +1,51 @@
-let columns = 10;
-let rows = 10;
+// parametri
 
-//
+let parti = 100;
+let parola = "DNA";
+
+// asset
 
 let font;
 
 function preload() {
-  font = loadFont("./assets/InputMonoCondensed-Light.ttf");
+  font = loadFont("./assets/radiometry.ttf");
 }
 
-//
+// codice
+
+let h_parti;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, "webgl");
-  angleMode(DEGREES);
+  createCanvas(windowWidth, windowHeight, WEBGL);
+  //con WEBGL attivo la modalità 3d
 
   textFont(font);
-  textSize(height / 10);
-}
+  textAlign(CENTER);
 
-//
+  h_parti = height / parti;
+  textSize(h_parti);
+}
 
 function draw() {
-  background("blue");
+  background("black");
+
   orbitControl();
+  //la funzione orbitControl consente di ruotare la telecamera degli elementi 3d
 
-  let angle = 360 / columns;
-  let diameter = textSize();
+  translate(0, -height / 2);
 
-  fill("white");
-
-  rotateY(-frameCount);
-  for (let i = 0; i < columns; i++) {
+  for (let i = 0; i < parti; i++) {
     push();
-    rotateY(angle * i);
-    translate(diameter, 0, 0);
-    for (let j = 0; j < rows; j++) {
-      const a = cos(frameCount * 5 + j * 20);
-      const m = map(a, -1, 1, 0, textSize());
-      push();
-      translate(m, textSize() * (j - rows / 2), 0);
-      text("Ciao", 0, 0);
-      pop();
-    }
+    let x = 0; //map(cos(frameCount / 50 + i * 1), -1, 1, -100, 100)
+    let y = 0; //map(cos(frameCount / 50 + i * 2), -1, 1, -200, 100)
+    let z = map(cos(frameCount / 50 + i * 3), -1, 1, -300, 100);
+
+    translate(x, y, z);
+
+    let y_parte = i * h_parti;
+    let y_parola = y_parte + h_parti - textDescent();
+    text(parola, 0, y_parola);
+
     pop();
   }
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
 }
