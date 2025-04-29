@@ -24,16 +24,15 @@ function setup() {
   textFont(font);
   textAlign(CENTER);
 
-  h_parti = height / parti;
-  textSize(h_parti);
+  setup_h_parti();
 
   cam = createCamera(); // funzione che crea la telecamera
-  cam.setPosition(800, 0, 1000); // posizione della telecamera
-  cam.lookAt(0, 0, 0); // la telecamera guarda verso il centro della scena
+  setupcam();
 }
 
 function draw() {
   background("black");
+  rotateY(-0.3);
 
   //orbitControl();
   //la funzione orbitControl consente di ruotare la telecamera degli elementi 3d
@@ -55,6 +54,20 @@ function draw() {
     pop();
   }
 }
+
+//utility functions
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+  setup_h_parti();
+  setupcam();
+}
+
+function setupcam() {
+  // cam.setPosition(width / 2, 0, height * 0.9); // posizione della telecamera
+  // cam.lookAt(0, 0, 0); // la telecamera guarda verso il centro della scena
+}
+
+function setup_h_parti() {
+  h_parti = height / parti;
+  textSize(h_parti);
 }
