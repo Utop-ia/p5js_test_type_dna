@@ -11,6 +11,8 @@ function preload() {
   font = loadFont("./assets/radiometry.ttf");
 }
 
+let cam; // variabile per la telecamera
+
 // codice
 
 let h_parti;
@@ -24,12 +26,16 @@ function setup() {
 
   h_parti = height / parti;
   textSize(h_parti);
+
+  cam = createCamera(); // funzione che crea la telecamera
+  cam.setPosition(800, 0, 1000); // posizione della telecamera
+  cam.lookAt(0, 0, 0); // la telecamera guarda verso il centro della scena
 }
 
 function draw() {
   background("black");
 
-  orbitControl();
+  //orbitControl();
   //la funzione orbitControl consente di ruotare la telecamera degli elementi 3d
 
   translate(0, -height / 2);
