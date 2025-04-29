@@ -71,3 +71,6 @@ function setup_h_parti() {
   h_parti = height / parti;
   textSize(h_parti);
 }
+const degToRad = (degrees) => {
+  return (degrees / 180) * Math.PI; // convertire gradi in radianti (gradi / 180) * Math.PI
+};
